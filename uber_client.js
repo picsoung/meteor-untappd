@@ -44,6 +44,6 @@ Uber.requestCredential = function (options, credentialRequestCompleteCallback) {
     loginUrl: loginUrl,
     credentialRequestCompleteCallback: credentialRequestCompleteCallback,
     credentialToken: credentialToken,
-    popupOptions: {width: 900, height: height}
+    popupOptions: {width: 900, height: 600}
   });
 };

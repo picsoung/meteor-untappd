@@ -55,7 +55,7 @@ var getTokenResponse = function (query) {
   if (!response.data) { // if the http response was a json object with an error attribute
     throw new Error("Failed to complete OAuth handshake with Uber. " + response.data.error);
   } else {
-    console.log("DAATA",response.data);
+    console.log("DATA",response.data);
     return {
       accessToken: response.data.access_token,
       expiresIn: response.data.expires_in,

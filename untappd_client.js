@@ -1,18 +1,18 @@
-Uber = {};
+Untappd = {};
 
-// Request Uber credentials for the user
+// Request untappd credentials for the user
 // @param options {optional}
 // @param credentialRequestCompleteCallback {Function} Callback function to call on
 //   completion. Takes one argument, credentialToken on success, or Error on
 //   error.
-Uber.requestCredential = function (options, credentialRequestCompleteCallback) {
+Untappd.requestCredential = function (options, credentialRequestCompleteCallback) {
   // support both (options, callback) and (callback).
   if (!credentialRequestCompleteCallback && typeof options === 'function') {
     credentialRequestCompleteCallback = options;
     options = {};
   }
 
-  var config = ServiceConfiguration.configurations.findOne({service: 'uber'});
+  var config = ServiceConfiguration.configurations.findOne({service: 'untappd'});
   if (!config) {
     credentialRequestCompleteCallback && credentialRequestCompleteCallback(
       new ServiceConfiguration.ConfigError()
@@ -20,26 +20,27 @@ Uber.requestCredential = function (options, credentialRequestCompleteCallback) {
     return;
   }
 
-  var credentialToken = Random.secret();
+  var credentialToken = Random.id();
 
   var scope = (options && options.requestPermissions) || [];
   var flatScope = _.map(scope, encodeURIComponent).join(',') || 'profile';
 
-  var redirectURI = OAuth._redirectUri('uber', config);
+  var redirectURI = OAuth._redirectUri('untappd', config);
   var encodedRedirectURI = encodeURIComponent(redirectURI);
 
-  var loginStyle = OAuth._loginStyle('uber', config, options);
+  var loginStyle = OAuth._loginStyle('untappd', config, options);
 
   var loginUrl =
-        'https://login.uber.com/oauth/v2/authorize?'+
-        'response_type=code' +
+        'https://untappd.com/oauth/authenticate'+
+        '?response_type=code' +
         '&client_id=' + config.client_id +
-        '&state=' + OAuth._stateParam(loginStyle, credentialToken, options.redirectUrl)+
-        '&scope=' + flatScope +
-        '&redirect_uri=' + encodedRedirectURI;
+        '&redirect_url=' + encodedRedirectURI+
+        '&state=' + OAuth._stateParam(loginStyle, credentialToken, options && options.redirectUrl);
+
+        console.log(OAuth._stateParam(loginStyle, credentialToken))
 
   OAuth.launchLogin({
-    loginService: 'uber',
+    loginService: 'untappd',
     loginStyle: loginStyle,
     loginUrl: loginUrl,
     credentialRequestCompleteCallback: credentialRequestCompleteCallback,

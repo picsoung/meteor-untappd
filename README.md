@@ -1,5 +1,5 @@
-#meteor-uber
-An implementation of the Uber OAuth flow.
+#meteor-untappd
+An implementation of the Untappd OAuth flow.
 
 #package dependencies
 
@@ -8,4 +8,4 @@ An implementation of the Uber OAuth flow.
 
 #installation
 
-`meteor add picsoung:uber`
+`meteor add picsoung:untappd`

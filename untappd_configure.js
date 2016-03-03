@@ -1,10 +1,10 @@
-Template.configureLoginServiceDialogForUber.helpers({
+Template.configureLoginServiceDialogForUntappd.helpers({
   siteUrl: function () {
     return Meteor.absoluteUrl();
   }
 });
 
-Template.configureLoginServiceDialogForUber.fields = function () {
+Template.configureLoginServiceDialogForUntappd.fields = function () {
   return [
     {property: 'client_id', label: 'Client ID'},
     {property: 'client_secret', label: 'Client secret'},
